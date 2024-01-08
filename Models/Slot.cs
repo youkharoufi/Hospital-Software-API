@@ -2,11 +2,9 @@
 {
     public class Slot
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        public DateOnly Date { get; set; }
-
-        public TimeOnly Time { get; set; }
+        public DateTime DateTime { get; set; }
 
         public string DoctorId { get; set; }
 

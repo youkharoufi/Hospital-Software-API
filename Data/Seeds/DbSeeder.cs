@@ -53,44 +53,54 @@ namespace Hospital_Software.Data.Seeds
             
         }
 
-        public static List<Slot> GenerateWeeklySlots(string doctorId)
+        private static async Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
         {
             var slots = new List<Slot>();
-            var startDate = DateOnly.FromDateTime(DateTime.Today);
-            var endDate = startDate.AddDays(7);
-
-            var startTime = new TimeOnly(9, 0); // Starting at 9 AM
-            var endTime = new TimeOnly(17, 0);  // Ending at 5 PM
-
-            int slotId = 1; // Starting ID, you might want to generate this differently
+            var startDate = DateTime.Today; // Start from today
+            var endDate = startDate.AddDays(7); // Generate slots for the next 7 days
 
             for (var date = startDate; date < endDate; date = date.AddDays(1))
             {
-                for (var time = startTime; time < endTime; time = time.AddHours(1))
+                for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
                 {
+                    var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
                     slots.Add(new Slot
                     {
-                        Id = slotId++,
-                        Date = date,
-                        Time = time,
-                        DoctorId = doctorId
+                        Id = Guid.NewGuid().ToString(),
+                        DateTime = dateTime,
+                        DoctorId = doctorId,
+                        Booked = false
                     });
                 }
             }
 
-            return slots;
+            // No asynchronous operation here, so we can return the result directly
+            return await Task.FromResult(slots);
         }
+
 
         public static async Task SeedSlotsAsync(IMongoCollection<Slot> slotsCollection, string doctorId)
         {
-            // Example: Check if slots for this doctor already exist
-            var existingSlotCount = await slotsCollection.CountDocumentsAsync(slot => slot.DoctorId == doctorId);
-            if (existingSlotCount == 0)
+            var slots = await GenerateWeeklySlotsAsync(doctorId);
+
+            // Create a list to hold new slots that do not exist in the collection
+            var newSlots = new List<Slot>();
+
+            foreach (var slot in slots)
             {
-                var slots = GenerateWeeklySlots(doctorId);
-                await slotsCollection.InsertManyAsync(slots);
+                var existingSlot = await slotsCollection.Find(s => s.Id == slot.Id).FirstOrDefaultAsync();
+                if (existingSlot == null)
+                {
+                    newSlots.Add(slot);
+                }
+            }
+
+            if (newSlots.Any())
+            {
+                await slotsCollection.InsertManyAsync(newSlots);
             }
         }
+
 
 
 

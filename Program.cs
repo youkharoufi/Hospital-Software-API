@@ -1,7 +1,9 @@
+using Hospital_Software.BackgroundFunctions;
 using Hospital_Software.Data;
 using Hospital_Software.Data.MongoDbStores;
 using Hospital_Software.Data.Seeds;
 using Hospital_Software.Models;
+using Hospital_Software.Services;
 using Hospital_Software.Token;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Driver;
@@ -32,6 +34,12 @@ builder.Services.AddSingleton<IMongoDatabase>(serviceProvider =>
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddScoped<IRoleStore<ApplicationRole>, MyMongoDbRoleStore>();
+
+builder.Services.AddHostedService<SlotRefreshBackgroundService>();
+
+builder.Services.AddScoped<ISlotService, SlotService>();
+
+
 
 
 // Swagger configuration...

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using AspNetCore.Identity.MongoDbCore.Models;
+using Hospital_Software.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.VisualBasic;
 
@@ -20,5 +21,6 @@ namespace Hospital_Software.Models
         public string RoleName { get; set; }
 
         public ApplicationRole AppRole { get; set; }
+
     }
 }

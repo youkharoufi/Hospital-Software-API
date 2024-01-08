@@ -35,7 +35,7 @@ namespace Hospital_Software.Controllers
 
 
         [HttpPost("register-admin")]
-        public async Task<ActionResult<ApplicationUser>> RegisterAdmin(RegisterUser registerUser)
+        public async Task<ActionResult<ApplicationUser>> RegisterAdmin([FromForm]RegisterUser registerUser)
         {
             var newUser = new ApplicationUser
             {   
@@ -67,6 +67,33 @@ namespace Hospital_Software.Controllers
 
         }
 
+        private static async Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
+        {
+            var slots = new List<Slot>();
+            var startDate = DateTime.Today; // Start from today
+            var endDate = startDate.AddDays(7); // Generate slots for the next 7 days
+
+            for (var date = startDate; date < endDate; date = date.AddDays(1))
+            {
+                for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
+                {
+                    var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
+                    slots.Add(new Slot
+                    {
+                        Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
+                        DateTime = dateTime,
+                        DoctorId = doctorId,
+                        Booked = false
+                    });
+                }
+            }
+
+            // No asynchronous operation here, so we can return the result directly
+            return slots;
+        }
+
+
+
         [HttpPost("register-doctor")]
         public async Task<ActionResult<ApplicationUser>> RegisterDoctor([FromForm]RegisterUser registerUser)
         {
@@ -95,13 +122,19 @@ namespace Hospital_Software.Controllers
 
             }
 
+            var slots = await GenerateWeeklySlotsAsync(newUser.Id);
+
+            var slotsCollection = _context.GetCollection<Slot>("Slots");
+
+            await slotsCollection.InsertManyAsync(slots);
+
             return Ok(newUser);
 
 
         }
 
         [HttpPost("register-patient")]
-        public async Task<ActionResult<ApplicationUser>> RegisterPatient(RegisterUser registerUser)
+        public async Task<ActionResult<ApplicationUser>> RegisterPatient([FromForm]RegisterUser registerUser)
         {
             var newUser = new ApplicationUser
             {
@@ -128,6 +161,7 @@ namespace Hospital_Software.Controllers
 
             }
 
+
             return Ok(newUser);
 
 
@@ -150,41 +184,6 @@ namespace Hospital_Software.Controllers
         }
 
 
-        [HttpGet("available-slots/{doctorId}")]
-        public async Task<ActionResult<List<DateTime>>> availableSlots(string doctorId)
-        {
-            var doctorFromDb = await _userManager.FindByIdAsync(doctorId);
-
-            var slotsCollection = _context.GetCollection<Slot>("Slots");
-
-            var filter = Builders<Slot>.Filter.Eq(s => s.DoctorId, doctorId) & Builders<Slot>.Filter.Eq(s => s.Booked, false);
-            var availableSlots = await slotsCollection.Find(filter).ToListAsync();
-
-            return Ok(availableSlots);
-        }
-
-
-        [HttpPost("patient-books-slot/{patientId}/{doctorId}/{slotId}")]
-        public async Task<ActionResult<Slot>> patientBooksSlot(string patientId, string doctorId, int slotId)
-        {
-            var patient = await _userManager.FindByIdAsync(patientId);
-            var doc = await _userManager.FindByIdAsync(doctorId);
-
-            var slotsCollection = _context.GetCollection<Slot>("Slots");
-
-
-            var filter = Builders<Slot>.Filter.Eq(s => s.Id, slotId);
-            var slot = await slotsCollection.Find(filter).FirstOrDefaultAsync();
-
-            slot.Booked = true;
-            slot.DoctorId = doc.Id;
-            slot.patientId = patient.Id;
-
-
-            return Ok(slot);
-
-
-        }
 
 
     }
