@@ -1,0 +1,89 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Elie.jpg",
+      "PackagePath": "staticwebassets\\images\\Elie.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Estelle1.jpg",
+      "PackagePath": "staticwebassets\\images\\Estelle1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Henry.webp",
+      "PackagePath": "staticwebassets\\images\\Henry.webp"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Janine.jpg",
+      "PackagePath": "staticwebassets\\images\\Janine.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Jean.jpg",
+      "PackagePath": "staticwebassets\\images\\Jean.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Kakashi.jpg",
+      "PackagePath": "staticwebassets\\images\\Kakashi.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Miloud.jpg",
+      "PackagePath": "staticwebassets\\images\\Miloud.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Pierre.jpg",
+      "PackagePath": "staticwebassets\\images\\Pierre.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Soraya.jpg",
+      "PackagePath": "staticwebassets\\images\\Soraya.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Youssef.webp",
+      "PackagePath": "staticwebassets\\images\\Youssef.webp"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\annie.jpg",
+      "PackagePath": "staticwebassets\\images\\annie.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\armin.jpg",
+      "PackagePath": "staticwebassets\\images\\armin.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\hinata.png",
+      "PackagePath": "staticwebassets\\images\\hinata.png"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\mikasa.jpg",
+      "PackagePath": "staticwebassets\\images\\mikasa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\riskaa.jpg",
+      "PackagePath": "staticwebassets\\images\\riskaa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\rocklee.png",
+      "PackagePath": "staticwebassets\\images\\rocklee.png"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\shino.png",
+      "PackagePath": "staticwebassets\\images\\shino.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Hospital-Software.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.Hospital-Software.props",
+      "PackagePath": "build\\Hospital-Software.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Hospital-Software.props",
+      "PackagePath": "buildMultiTargeting\\Hospital-Software.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.Hospital-Software.props",
+      "PackagePath": "buildTransitive\\Hospital-Software.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

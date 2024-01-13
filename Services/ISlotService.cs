@@ -4,12 +4,12 @@ namespace Hospital_Software.Services
 {
     public interface ISlotService
     {
-        Task UpdateSlotsAsync();
+        //Task UpdateSlotsAsync();
         Task<IEnumerable<Slot>> GetAvailableSlotsAsync(string doctorId);
 
         Task<List<string>> GetAllDoctorIds();
 
-        Task<IEnumerable<Slot>> GenerateFutureSlots(DateTime startDate, int daysToGenerate);
+        //Task<IEnumerable<Slot>> GenerateFutureSlots(DateTime startDate, int daysToGenerate);
 
         Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId);
 

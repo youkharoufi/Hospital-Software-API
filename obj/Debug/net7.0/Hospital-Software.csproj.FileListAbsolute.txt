@@ -71,3 +71,4 @@ C:\Users\KharoufiY\.NET Projects\Hospital-Software\Hospital-Software\bin\Debug\n
 C:\Users\KharoufiY\.NET Projects\Hospital-Software\Hospital-Software\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\KharoufiY\.NET Projects\Hospital-Software\Hospital-Software\bin\Debug\net7.0\AspNetCore.Identity.MongoDbCore.dll
 C:\Users\KharoufiY\.NET Projects\Hospital-Software\Hospital-Software\bin\Debug\net7.0\MongoDbGenericRepository.dll
+C:\Users\KharoufiY\.NET Projects\Hospital-Software\Hospital-Software\bin\Debug\net7.0\Hospital-Software.staticwebassets.runtime.json

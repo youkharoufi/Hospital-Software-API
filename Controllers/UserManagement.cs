@@ -30,15 +30,15 @@ namespace Hospital_Software.Controllers
             _signInManager = signInManager;
             _token = token;
             _context = context;
-            
+
         }
 
 
         [HttpPost("register-admin")]
-        public async Task<ActionResult<ApplicationUser>> RegisterAdmin([FromForm]RegisterUser registerUser)
+        public async Task<ActionResult<ApplicationUser>> RegisterAdmin([FromForm] RegisterUser registerUser)
         {
             var newUser = new ApplicationUser
-            {   
+            {
                 UserName = registerUser.Firstname,
                 Firstname = registerUser.Firstname,
                 Lastname = registerUser.Lastname,
@@ -56,7 +56,7 @@ namespace Hospital_Software.Controllers
 
             var result2 = await _userManager.AddToRoleAsync(newUser, "Admin");
 
-            if(!result2.Succeeded)
+            if (!result2.Succeeded)
             {
                 return BadRequest(result2.Errors.Select(e => e.Description));
 
@@ -67,108 +67,178 @@ namespace Hospital_Software.Controllers
 
         }
 
-        private static async Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
+        private async static Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
         {
-            var slots = new List<Slot>();
             var startDate = DateTime.Today; // Start from today
             var endDate = startDate.AddDays(7); // Generate slots for the next 7 days
+
+            var slotsForDoctor = new Slot
+            {
+                Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
+                DoctorId = doctorId,
+                SlotTime = new List<DateTime>(),
+                Booked = false
+            };
 
             for (var date = startDate; date < endDate; date = date.AddDays(1))
             {
                 for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
                 {
                     var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
-                    slots.Add(new Slot
-                    {
-                        Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
-                        DateTime = dateTime,
-                        DoctorId = doctorId,
-                        Booked = false
-                    });
+                    slotsForDoctor.SlotTime.Add(dateTime);
                 }
             }
 
-            // No asynchronous operation here, so we can return the result directly
-            return slots;
+            // Return a list containing a single Slot with multiple times
+            return new List<Slot> { slotsForDoctor };
         }
 
+
+        private bool IsImageFile(IFormFile file)
+        {
+            // Check the file type and size here
+            // For example, only allow JPEG and PNG files smaller than 5MB
+            return file.Length > 0 &&
+                   file.Length < 5 * 1024 * 1024 &&
+                   (file.ContentType.ToLower() == "image/jpeg" ||
+                    file.ContentType.ToLower() == "image/png");
+        }
+
+        private async Task<string> ProcessImageUploadAsync(IFormFile file)
+        {
+            // Process and store the image file
+            // For example, save it in a directory on the server or upload it to cloud storage
+
+            // Generate a unique file name to prevent overwriting existing files
+            var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", uniqueFileName);
+
+            // Save the file
+            using (var fileStream = new FileStream(uploadPath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            // Return the URL of the image
+            // If using cloud storage, this URL should be the URL of the image in the cloud
+            var imageUrl = $"https://localhost:7292/images/{uniqueFileName}";
+            return imageUrl;
+        }
 
 
         [HttpPost("register-doctor")]
-        public async Task<ActionResult<ApplicationUser>> RegisterDoctor([FromForm]RegisterUser registerUser)
+        public async Task<ActionResult<ApplicationUser>> RegisterDoctor([FromForm] RegisterUser registerUser, [FromForm] IFormFile imageFile)
         {
-            var newUser = new ApplicationUser
+            if (imageFile != null && !IsImageFile(imageFile))
             {
-                UserName = registerUser.Firstname,
-                Firstname = registerUser.Firstname,
-                Lastname = registerUser.Lastname,
-                BadgeNumber = registerUser.BadgeNumber,
-                RoleName = "Doctor"
-
-            };
-            var result1 = await _userManager.CreateAsync(newUser, registerUser.Password);
-
-            if (!result1.Succeeded)
-            {
-                return BadRequest(result1.Errors.Select(e => e.Description));
-
+                return BadRequest("Invalid file type. Only image files are allowed.");
             }
 
-            var result2 = await _userManager.AddToRoleAsync(newUser, "Doctor");
-
-            if (!result2.Succeeded)
+            try
             {
-                return BadRequest(result2.Errors.Select(e => e.Description));
+                var imageUrl = await ProcessImageUploadAsync(imageFile);
+
+                var newUser = new ApplicationUser
+                {
+                    UserName = registerUser.Firstname,
+                    Firstname = registerUser.Firstname,
+                    Lastname = registerUser.Lastname,
+                    BadgeNumber = registerUser.BadgeNumber,
+                    RoleName = "Doctor",
+                    PictureUrl = imageUrl
+
+                };
+
+
+                var result1 = await _userManager.CreateAsync(newUser, registerUser.Password);
+
+                if (!result1.Succeeded)
+                {
+                    return BadRequest(result1.Errors.Select(e => e.Description));
+
+                }
+
+                var result2 = await _userManager.AddToRoleAsync(newUser, "Doctor");
+
+                if (!result2.Succeeded)
+                {
+                    return BadRequest(result2.Errors.Select(e => e.Description));
+
+                }
+
+                var slots = await GenerateWeeklySlotsAsync(newUser.Id);
+
+                var slotsCollection = _context.GetCollection<Slot>("Slots");
+
+                await slotsCollection.InsertManyAsync(slots);
+
+                return Ok(newUser);
+
 
             }
-
-            var slots = await GenerateWeeklySlotsAsync(newUser.Id);
-
-            var slotsCollection = _context.GetCollection<Slot>("Slots");
-
-            await slotsCollection.InsertManyAsync(slots);
-
-            return Ok(newUser);
-
-
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
+
 
         [HttpPost("register-patient")]
-        public async Task<ActionResult<ApplicationUser>> RegisterPatient([FromForm]RegisterUser registerUser)
+        public async Task<ActionResult<ApplicationUser>> RegisterPatient([FromForm] RegisterUser registerUser)
         {
-            var newUser = new ApplicationUser
+            if (registerUser.ImageFile != null && !IsImageFile(registerUser.ImageFile))
             {
-                UserName = registerUser.Firstname,
-                Firstname = registerUser.Firstname,
-                Lastname = registerUser.Lastname,
-                BadgeNumber = registerUser.BadgeNumber,
-                RoleName = "Patient"
-
-            };
-            var result1 = await _userManager.CreateAsync(newUser, registerUser.Password);
-
-            if (!result1.Succeeded)
-            {
-                return BadRequest(result1.Errors.Select(e => e.Description));
-
+                return BadRequest("Invalid file type. Only image files are allowed.");
             }
 
-            var result2 = await _userManager.AddToRoleAsync(newUser, "Patient");
-
-            if (!result2.Succeeded)
+            try
             {
-                return BadRequest(result2.Errors.Select(e => e.Description));
+                var imageUrl = await ProcessImageUploadAsync(registerUser.ImageFile);
+
+                var newUser = new ApplicationUser
+                {
+                    UserName = registerUser.Firstname,
+                    Firstname = registerUser.Firstname,
+                    Lastname = registerUser.Lastname,
+                    BadgeNumber = registerUser.BadgeNumber,
+                    RoleName = "Patient",
+                    PictureUrl = imageUrl
+
+                };
+
+
+                var result1 = await _userManager.CreateAsync(newUser, registerUser.Password);
+
+                if (!result1.Succeeded)
+                {
+                    return BadRequest(result1.Errors.Select(e => e.Description));
+
+                }
+
+                var result2 = await _userManager.AddToRoleAsync(newUser, "Patient");
+
+                if (!result2.Succeeded)
+                {
+                    return BadRequest(result2.Errors.Select(e => e.Description));
+
+                }
+
+
+                return Ok(newUser);
+
 
             }
-
-
-            return Ok(newUser);
-
-
-        }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        } 
 
         [HttpPost("login")]
-        public async Task<ActionResult<ApplicationUser>> login([FromForm]LoginUser loginUser)
+        public async Task<ActionResult<ApplicationUser>> login(LoginUser loginUser)
         {
             var userFromDb = await _userManager.FindByNameAsync(loginUser.UserName);
 
@@ -181,6 +251,39 @@ namespace Hospital_Software.Controllers
             userFromDb.Token = await _token.GenerateToken(userFromDb);
 
             return Ok(userFromDb);
+        }
+
+        [HttpGet("all-doctors")]
+        public async Task<List<ApplicationUser>> GetAllDoctors()
+        {
+            var allUsers = _context.GetCollection<ApplicationUser>("Users");
+
+            var doctorRoleFilter = Builders<ApplicationUser>.Filter.Eq(user => user.RoleName, "Doctor");
+            var doctors = await allUsers.Find(doctorRoleFilter).ToListAsync();
+
+            return doctors;
+        }
+
+        [HttpGet("doctors-by-specialty/{spe}")]
+        public async Task<List<ApplicationUser>> GetDoctorsBySpecialty(string spe)
+        {
+            var allUsers = _context.GetCollection<ApplicationUser>("Users");
+
+            var doctorRoleFilter = Builders<ApplicationUser>.Filter.Eq(user => user.Speciality, spe);
+            var doctors = await allUsers.Find(doctorRoleFilter).ToListAsync();
+
+            return doctors;
+        }
+
+        [HttpGet("doctors-by-id/{doctorId}")]
+        public async Task<ApplicationUser> GetDoctorsById(string doctorId)
+        {
+            var allUsers = _context.GetCollection<ApplicationUser>("Users");
+
+            var doctorRoleFilter = Builders<ApplicationUser>.Filter.Eq(user => user.Id, doctorId);
+            var doctor = await allUsers.Find(doctorRoleFilter).FirstOrDefaultAsync();
+
+            return doctor;
         }
 
 

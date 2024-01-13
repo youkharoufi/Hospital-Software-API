@@ -8,8 +8,12 @@
 
         public string Password { get; set; }
 
-        public int BadgeNumber { get; set; }
+        public int? BadgeNumber { get; set; }
 
         public string RoleName { get; set; }
+
+        public string? PictureUrl { get; set; }
+
+        public IFormFile ImageFile { get; set; }
     }
 }

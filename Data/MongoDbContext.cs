@@ -21,9 +21,9 @@ namespace Hospital_Software.Data
 
 
         // Example MongoDB collection properties
-        public IMongoCollection<ApplicationUser> MyMongoDocuments => GetCollection<ApplicationUser>("Users");
+        public IMongoCollection<ApplicationUser> Users => GetCollection<ApplicationUser>("Users");
 
-        public IMongoCollection<ApplicationRole> MyRoles => GetCollection<ApplicationRole>("Roles");
+        public IMongoCollection<ApplicationRole> Roles => GetCollection<ApplicationRole>("Roles");
 
 
         public IMongoCollection<Slot> Slots => GetCollection<Slot>("Slots");

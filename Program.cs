@@ -35,11 +35,11 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddScoped<IRoleStore<ApplicationRole>, MyMongoDbRoleStore>();
 
-builder.Services.AddHostedService<SlotRefreshBackgroundService>();
+//builder.Services.AddHostedService<SlotRefreshBackgroundService>();
 
 builder.Services.AddScoped<ISlotService, SlotService>();
 
-
+builder.Services.AddCors();
 
 
 // Swagger configuration...
@@ -57,6 +57,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
+
+
 app.UseAuthentication(); // Added for Identity
 app.UseAuthorization();
 
@@ -70,7 +75,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
     var mongoDbContext = services.GetRequiredService<MongoDbContext>();
 
-    var userCollection = mongoDbContext.MyMongoDocuments; // This is the correct way to initialize userCollection
+    var userCollection = mongoDbContext.Users; // This is the correct way to initialize userCollection
 
 
     // Seeding Users and Roles

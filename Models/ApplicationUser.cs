@@ -22,5 +22,9 @@ namespace Hospital_Software.Models
 
         public ApplicationRole AppRole { get; set; }
 
+        public string PictureUrl { get; set; }
+
+        public string? Speciality { get; set; }
+
     }
 }
