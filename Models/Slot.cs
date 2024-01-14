@@ -4,7 +4,7 @@
     {
         public string Id { get; set; }
 
-        public List<DateTime> SlotTime { get; set; } = new List<DateTime>();
+        public DateTime SlotTime { get; set; } 
 
         public string DoctorId { get; set; }
 

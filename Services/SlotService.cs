@@ -43,22 +43,14 @@ namespace Hospital_Software.Services
         {
             var today = DateTime.Today;
 
-            // Get all slots for the doctor that are not booked
+            // Get all future slots for the doctor that are not booked
             var filter = Builders<Slot>.Filter.And(
                 Builders<Slot>.Filter.Eq(slot => slot.DoctorId, doctorId),
+                Builders<Slot>.Filter.Gte(slot => slot.SlotTime, today), // Only future slots
                 Builders<Slot>.Filter.Eq(slot => slot.Booked, false)
             );
-            var slots = await _slotsCollection.Find(filter).ToListAsync();
 
-            // Filter out past slot times on the application side
-            var availableSlots = slots.Select(slot => new Slot
-            {
-                Id = slot.Id,
-                DoctorId = slot.DoctorId,
-                patientId = slot.patientId,
-                Booked = slot.Booked,
-                SlotTime = slot.SlotTime.Where(date => date >= today).ToList()
-            });
+            var availableSlots = await _slotsCollection.Find(filter).ToListAsync();
 
             return availableSlots;
         }
@@ -109,46 +101,6 @@ namespace Hospital_Software.Services
         //    return allSlots;
         //}
 
-
-        public async Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
-        {
-            var startDate = DateTime.Today; // Start from today
-            var endDate = startDate.AddDays(7); // Generate slots for the next 7 days
-
-            var slotsForDoctor = new Slot
-            {
-                Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
-                DoctorId = doctorId,
-                SlotTime = new List<DateTime>(),
-                Booked = false
-            };
-
-            for (var date = startDate; date < endDate; date = date.AddDays(1))
-            {
-                for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
-                {
-                    var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
-                    slotsForDoctor.SlotTime.Add(dateTime);
-                }
-            }
-
-            // Return a list containing a single Slot with multiple times
-            return new List<Slot> { slotsForDoctor };
-        }
-
-
-
-
-        public async Task DeletePastSlotsAsync()
-        {
-            var yesterday = DateTime.Today.AddDays(-1);
-
-            // Filter to match any slots where at least one slot time is before today (yesterday or earlier)
-            var filter = Builders<Slot>.Filter.ElemMatch(slot => slot.SlotTime, date => date <= yesterday);
-
-            // Delete all slots that match the filter
-            await _slotsCollection.DeleteManyAsync(filter);
-        }
 
 
 

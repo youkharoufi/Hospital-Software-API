@@ -72,26 +72,30 @@ namespace Hospital_Software.Controllers
             var startDate = DateTime.Today; // Start from today
             var endDate = startDate.AddDays(7); // Generate slots for the next 7 days
 
-            var slotsForDoctor = new Slot
-            {
-                Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
-                DoctorId = doctorId,
-                SlotTime = new List<DateTime>(),
-                Booked = false
-            };
+            var slots = new List<Slot>();
 
             for (var date = startDate; date < endDate; date = date.AddDays(1))
             {
                 for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
                 {
                     var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
-                    slotsForDoctor.SlotTime.Add(dateTime);
+
+                    var slot = new Slot
+                    {
+                        Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
+                        SlotTime = dateTime,
+                        DoctorId = doctorId,
+                        Booked = false
+                    };
+
+                    slots.Add(slot);
                 }
             }
 
-            // Return a list containing a single Slot with multiple times
-            return new List<Slot> { slotsForDoctor };
+            // Return a list of slots, each representing a different time slot
+            return slots;
         }
+
 
 
         private bool IsImageFile(IFormFile file)

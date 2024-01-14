@@ -26,5 +26,7 @@ namespace Hospital_Software.Models
 
         public string? Speciality { get; set; }
 
+        public Slot? bookedSlots { get; set; }
+
     }
 }
