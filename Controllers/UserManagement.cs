@@ -279,16 +279,22 @@ namespace Hospital_Software.Controllers
             return doctors;
         }
 
-        [HttpGet("doctors-by-id/{doctorId}")]
-        public async Task<ApplicationUser> GetDoctorsById(string doctorId)
+        [HttpGet("doctor-by-id/{doctorId}")]
+        public async Task<ActionResult<ApplicationUser>> GetDoctorById(string doctorId)
         {
             var allUsers = _context.GetCollection<ApplicationUser>("Users");
 
             var doctorRoleFilter = Builders<ApplicationUser>.Filter.Eq(user => user.Id, doctorId);
             var doctor = await allUsers.Find(doctorRoleFilter).FirstOrDefaultAsync();
 
+            if (doctor == null || doctor.RoleName != "Doctor")
+            {
+                return NotFound(); // Or handle the case appropriately
+            }
+
             return doctor;
         }
+
 
 
 

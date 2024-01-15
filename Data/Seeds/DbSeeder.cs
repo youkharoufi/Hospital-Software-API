@@ -78,7 +78,7 @@ namespace Hospital_Software.Data.Seeds
 
             for (var date = startDate; date < endDate; date = date.AddDays(1))
             {
-                for (var hour = 9; hour <= 17; hour++) // From 9 AM to 5 PM (inclusive)
+                for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
                 {
                     var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
 
@@ -98,6 +98,19 @@ namespace Hospital_Software.Data.Seeds
             return slots;
         }
 
+        public static List<string> GetAllDoctorIds(List<ApplicationUser> users)
+        {
+            return users.Where(user => user.RoleName == "Doctor").Select(user => user.Id).ToList();
+        }
+
+
+        public static async Task SeedSlotsForDoctorAsync(IMongoCollection<Slot> slotsCollection, string doctorId)
+        {
+            await SeedSlotsAsync(slotsCollection, doctorId);
+        }
+
+
+
 
 
 
@@ -105,8 +118,6 @@ namespace Hospital_Software.Data.Seeds
         public static async Task SeedSlotsAsync(IMongoCollection<Slot> slotsCollection, string doctorId)
         {
             var slots = await GenerateWeeklySlotsAsync(doctorId);
-
-            var slotsCount = await slotsCollection.CountDocumentsAsync(new BsonDocument());
 
             // Create a list to hold new slots that do not exist in the collection
             var newSlots = new List<Slot>();
@@ -120,7 +131,7 @@ namespace Hospital_Software.Data.Seeds
                 }
             }
 
-            if (slotsCount == 0)
+            if (newSlots.Any())
             {
                 await slotsCollection.InsertManyAsync(newSlots);
             }

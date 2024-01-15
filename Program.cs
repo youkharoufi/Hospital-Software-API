@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Hospital_Software.BackgroundFunctions;
 using Hospital_Software.Data;
 using Hospital_Software.Data.MongoDbStores;
@@ -7,6 +8,7 @@ using Hospital_Software.Services;
 using Hospital_Software.Token;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Driver;
+using MongoDbGenericRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddRoleStore<MyMongoDbRoleStore>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddSingleton<Hospital_Software.Data.MongoDbContext>();
 
 builder.Services.AddSingleton<IMongoDatabase>(serviceProvider =>
 {
@@ -35,7 +37,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddScoped<IRoleStore<ApplicationRole>, MyMongoDbRoleStore>();
 
-//builder.Services.AddHostedService<SlotRefreshBackgroundService>();
+builder.Services.AddHostedService<SlotRefreshBackgroundService>();
 
 builder.Services.AddScoped<ISlotService, SlotService>();
 
@@ -73,10 +75,10 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
-    var mongoDbContext = services.GetRequiredService<MongoDbContext>();
+    var mongoDbContext = services.GetRequiredService<Hospital_Software.Data.MongoDbContext>();
 
-    var userCollection = mongoDbContext.Users; // This is the correct way to initialize userCollection
-
+    var slotCollection = mongoDbContext.Slots;
+    var userCollection = mongoDbContext.Users;
 
     // Seeding Users and Roles
     await DbSeeder.SeedUsersAsync(userManager, mongoDbContext);
@@ -85,12 +87,20 @@ using (var scope = app.Services.CreateScope())
     // Retrieve all users with the "Doctor" role
     var filter = Builders<ApplicationUser>.Filter.Where(u => u.RoleName == "Doctor");
     var doctorUsers = await userCollection.Find(filter).ToListAsync();
-    // Seed Slots for each doctor
-    foreach (var doctor in doctorUsers)
+
+    var existingSlotsCount = await slotCollection.CountDocumentsAsync(FilterDefinition<Slot>.Empty);
+
+    if (existingSlotsCount == 0)
     {
-        await DbSeeder.SeedSlotsAsync(mongoDbContext.Slots, doctor.Id);
+        foreach (var doctor in doctorUsers)
+        {
+            await DbSeeder.SeedSlotsForDoctorAsync(slotCollection, doctor.Id); // Assuming doctor.Id is the identifier
+        }
     }
+    // Seed Slots for each doctor
+    
 }
+
 
 
 

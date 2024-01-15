@@ -59,14 +59,14 @@ namespace Hospital_Software.Services
 
 
 
-        public async Task<List<string>> GetAllDoctorIds()
+        public async Task<List<ApplicationUser>> GetAllDoctors()
         {
             // Assuming that the role of a doctor is stored in the RoleName field of the ApplicationUser model
             var doctorRoleFilter = Builders<ApplicationUser>.Filter.Eq(user => user.RoleName, "Doctor");
             var doctors = await _userCollection.Find(doctorRoleFilter).ToListAsync();
 
             // Extracting and returning the IDs from the retrieved doctor records
-            return doctors.Select(doctor => doctor.Id).ToList();
+            return doctors;
         }
 
 
@@ -101,6 +101,34 @@ namespace Hospital_Software.Services
         //    return allSlots;
         //}
 
+        public async Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
+        {
+            var startDate = DateTime.Today; // Start from today
+            var endDate = startDate.AddDays(7); // Generate slots for the next 7 days
+
+            var slots = new List<Slot>();
+
+            for (var date = startDate; date < endDate; date = date.AddDays(1))
+            {
+                for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
+                {
+                    var dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0); // Create DateTime for each slot
+
+                    var slot = new Slot
+                    {
+                        Id = Guid.NewGuid().ToString(), // Use GUID for unique Id
+                        SlotTime = dateTime,
+                        DoctorId = doctorId,
+                        Booked = false
+                    };
+
+                    slots.Add(slot);
+                }
+            }
+
+            // Return a list of slots, each representing a different time slot
+            return slots;
+        }
 
 
 
@@ -127,7 +155,7 @@ namespace Hospital_Software.Services
             var update = Builders<Slot>.Update
                 .Set(s => s.Booked, true)
                 .Set(s => s.DoctorId, doc.Id)
-                .Set(s => s.patientId, patient.Id);
+                .Set(s => s.patientId, patientId);
 
                 var updateResult = await slotsCollection.UpdateOneAsync(filter, update);
 
@@ -148,6 +176,17 @@ namespace Hospital_Software.Services
             return slot;
 
         }
+
+        public async Task DeleteAllSlotsForDoctorAsync(string doctorId)
+        {
+            // Create a filter to find all slots for the specified doctor
+            var filter = Builders<Slot>.Filter.Eq(slot => slot.DoctorId, doctorId);
+
+            // Delete all slots that match the filter
+            await _slotsCollection.DeleteManyAsync(filter);
+        }
+
+
 
 
     }

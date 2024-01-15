@@ -7,9 +7,10 @@ namespace Hospital_Software.Services
         //Task UpdateSlotsAsync();
         Task<IEnumerable<Slot>> GetAvailableSlotsAsync(string doctorId);
 
-        Task<List<string>> GetAllDoctorIds();
+        Task<List<ApplicationUser>> GetAllDoctors();
 
-        //Task<IEnumerable<Slot>> GenerateFutureSlots(DateTime startDate, int daysToGenerate);
+        Task DeleteAllSlotsForDoctorAsync(string doctorId);
+        Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId);
 
         Task<Slot> PatientBooksSlot(string patientId, string doctorId, string slotId);
 

@@ -37,5 +37,11 @@ namespace Hospital_Software.Controllers
         {
             return Ok(await _slotService.getSlotById(slotId));
         }
+
+        [HttpPost("generate-new-slots/{doctorId}")]
+        public async Task<ActionResult<List<Slot>>> GenerateSlotsForDoctor(string doctorId)
+        {
+            return Ok(await _slotService.GenerateWeeklySlotsAsync(doctorId));
+        }
     }
 }
