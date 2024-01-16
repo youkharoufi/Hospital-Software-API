@@ -25,8 +25,10 @@ namespace Hospital_Software.Data
 
         public IMongoCollection<ApplicationRole> Roles => GetCollection<ApplicationRole>("Roles");
 
-
         public IMongoCollection<Slot> Slots => GetCollection<Slot>("Slots");
+
+        public IMongoCollection<Message> Messages => GetCollection<Message>("Messages");
+
 
 
         public IMongoCollection<T> GetCollection<T>(string name)

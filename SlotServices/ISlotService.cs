@@ -15,6 +15,14 @@ namespace Hospital_Software.Services
         Task<Slot> PatientBooksSlot(string patientId, string doctorId, string slotId);
 
         Task<Slot> getSlotById(string slotId);
+
+        Task<int> SlotCountForPatients(string patientId);
+
+        Task<int> SlotCountForDoctors(string docId);
+
+        Task<List<Slot>> BookedSlotsForDoctors(string docId);
+
+        Task<List<Slot>> BookedSlotsForPatients(string patientId);
     }
 
 }

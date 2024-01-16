@@ -186,6 +186,57 @@ namespace Hospital_Software.Services
             await _slotsCollection.DeleteManyAsync(filter);
         }
 
+        public async Task<int> SlotCountForPatients(string patientId)
+        {
+
+            DateTime now = DateTime.Now;
+
+            var slotsCollection = _context.GetCollection<Slot>("Slots");
+            var filter = Builders<Slot>.Filter.Eq(s => s.patientId, patientId) & Builders<Slot>.Filter.Eq(s => s.Booked, true) & Builders<Slot>.Filter.Gt(s => s.SlotTime, now);
+
+            var slot = await slotsCollection.Find(filter).ToListAsync();
+
+            return slot.Count();
+        }
+
+        public async Task<int> SlotCountForDoctors(string docId)
+        {
+            DateTime now = DateTime.Now;
+
+            var slotsCollection = _context.GetCollection<Slot>("Slots");
+            var filter = Builders<Slot>.Filter.Eq(s => s.DoctorId, docId) & Builders<Slot>.Filter.Eq(s => s.Booked, true) & Builders<Slot>.Filter.Gt(s => s.SlotTime, now);
+
+            var slot = await slotsCollection.Find(filter).ToListAsync();
+
+            return slot.Count();
+        }
+
+        public async Task<List<Slot>> BookedSlotsForDoctors(string docId)
+        {
+            DateTime now = DateTime.Now;
+
+            var slotsCollection = _context.GetCollection<Slot>("Slots");
+            var filter = Builders<Slot>.Filter.Eq(s => s.DoctorId, docId) & Builders<Slot>.Filter.Eq(s => s.Booked, true) & Builders<Slot>.Filter.Gt(s => s.SlotTime, now);
+
+            var slot = await slotsCollection.Find(filter).ToListAsync();
+
+            return slot;
+
+        }
+
+        public async Task<List<Slot>> BookedSlotsForPatients(string patientId)
+        {
+            DateTime now = DateTime.Now;
+
+            var slotsCollection = _context.GetCollection<Slot>("Slots");
+            var filter = Builders<Slot>.Filter.Eq(s => s.patientId, patientId) & Builders<Slot>.Filter.Eq(s => s.Booked, true) & Builders<Slot>.Filter.Gt(s => s.SlotTime, now);
+
+            var slot = await slotsCollection.Find(filter).ToListAsync();
+
+            return slot;
+
+        }
+
 
 
 

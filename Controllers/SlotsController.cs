@@ -43,5 +43,31 @@ namespace Hospital_Software.Controllers
         {
             return Ok(await _slotService.GenerateWeeklySlotsAsync(doctorId));
         }
+
+        [HttpGet("all-doctor-slots/{doctorId}")]
+        public async Task<ActionResult<List<Slot>>> GetAllDoctorSlots(string doctorId)
+        {
+            return Ok(await _slotService.BookedSlotsForDoctors(doctorId));
+        }
+
+        [HttpGet("all-patient-slots/{patientId}")]
+        public async Task<ActionResult<List<Slot>>> GetAllPatientSlots(string patientId)
+        {
+            return Ok(await _slotService.BookedSlotsForPatients(patientId));
+        }
+
+        [HttpGet("get-doctor-slots-count/{doctorId}")]
+        public async Task<ActionResult<List<Slot>>> GetDoctorSlotsCount(string doctorId)
+        {
+            return Ok(await _slotService.SlotCountForDoctors(doctorId));
+        }
+
+        [HttpGet("get-patient-slots-count/{patientId}")]
+        public async Task<ActionResult<List<Slot>>> GetPatientSlotsCount(string patientId)
+        {
+            return Ok(await _slotService.SlotCountForPatients(patientId));
+        }
+
+
     }
 }

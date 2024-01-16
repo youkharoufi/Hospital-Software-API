@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Hospital_Software.BackgroundFunctions;
+using Hospital_Software.ChatServices;
 using Hospital_Software.Data;
 using Hospital_Software.Data.MongoDbStores;
 using Hospital_Software.Data.Seeds;
@@ -41,7 +42,11 @@ builder.Services.AddHostedService<SlotRefreshBackgroundService>();
 
 builder.Services.AddScoped<ISlotService, SlotService>();
 
+builder.Services.AddScoped<IChatService, ChatService>();
+
 builder.Services.AddCors();
+
+builder.Services.AddSignalR();
 
 
 // Swagger configuration...
@@ -63,6 +68,7 @@ app.UseStaticFiles();
 
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
 
+app.UseRouting();
 
 app.UseAuthentication(); // Added for Identity
 app.UseAuthorization();
