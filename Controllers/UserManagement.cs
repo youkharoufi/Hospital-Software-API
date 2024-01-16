@@ -35,36 +35,54 @@ namespace Hospital_Software.Controllers
 
 
         [HttpPost("register-admin")]
-        public async Task<ActionResult<ApplicationUser>> RegisterAdmin([FromForm] RegisterUser registerUser)
+        public async Task<ActionResult<ApplicationUser>> RegisterAdmin([FromForm] RegisterUser registerUser, [FromForm] IFormFile imageFile)
         {
-            var newUser = new ApplicationUser
+            if (imageFile != null && !IsImageFile(imageFile))
             {
-                UserName = registerUser.Firstname,
-                Firstname = registerUser.Firstname,
-                Lastname = registerUser.Lastname,
-                BadgeNumber = registerUser.BadgeNumber,
-                RoleName = "Admin"
-
-            };
-            var result1 = await _userManager.CreateAsync(newUser, registerUser.Password);
-
-            if (!result1.Succeeded)
-            {
-                return BadRequest(result1.Errors.Select(e => e.Description));
-
+                return BadRequest("Invalid file type. Only image files are allowed.");
             }
 
-            var result2 = await _userManager.AddToRoleAsync(newUser, "Admin");
-
-            if (!result2.Succeeded)
+            try
             {
-                return BadRequest(result2.Errors.Select(e => e.Description));
+                var imageUrl = await ProcessImageUploadAsync(imageFile);
+
+                var newUser = new ApplicationUser
+                {
+                    UserName = registerUser.Firstname,
+                    Firstname = registerUser.Firstname,
+                    Lastname = registerUser.Lastname,
+                    BadgeNumber = registerUser.BadgeNumber,
+                    RoleName = "Admin",
+                    PictureUrl = imageUrl
+
+                };
+
+
+                var result1 = await _userManager.CreateAsync(newUser, registerUser.Password);
+
+                if (!result1.Succeeded)
+                {
+                    return BadRequest(result1.Errors.Select(e => e.Description));
+
+                }
+
+                var result2 = await _userManager.AddToRoleAsync(newUser, "Admin");
+
+                if (!result2.Succeeded)
+                {
+                    return BadRequest(result2.Errors.Select(e => e.Description));
+
+                }
+
+                return Ok(newUser);
+
 
             }
-
-            return Ok(newUser);
-
-
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
         }
 
         private async static Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)

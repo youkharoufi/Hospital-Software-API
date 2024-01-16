@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BG8vOny6IdZfj9jKv7x1w7dSSRGeiIk5oWQZ/UaVisA=",
+  "Hash": "zfcvtn37PPsd26NJSlC4DLWtxZkJrIw1VSjkIa8//q8=",
   "Source": "Hospital-Software",
   "BasePath": "_content/Hospital-Software",
   "Mode": "Default",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
+      "SourceId": "Hospital-Software",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
+      "BasePath": "_content/Hospital-Software",
+      "RelativePath": "images/1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png"
+    },
+    {
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png",
+      "SourceId": "Hospital-Software",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
+      "BasePath": "_content/Hospital-Software",
+      "RelativePath": "images/2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png"
+    },
     {
       "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\annie.jpg",
       "SourceId": "Hospital-Software",

@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
+      "PackagePath": "staticwebassets\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png"
+    },
+    {
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png",
+      "PackagePath": "staticwebassets\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png"
+    },
+    {
       "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Elie.jpg",
       "PackagePath": "staticwebassets\\images\\Elie.jpg"
     },
