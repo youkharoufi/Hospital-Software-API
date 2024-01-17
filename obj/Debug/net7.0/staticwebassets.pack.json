@@ -1,18 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png",
-      "PackagePath": "staticwebassets\\images\\0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png"
-    },
-    {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
-      "PackagePath": "staticwebassets\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png"
-    },
-    {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png",
-      "PackagePath": "staticwebassets\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png"
-    },
-    {
       "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Elie.jpg",
       "PackagePath": "staticwebassets\\images\\Elie.jpg"
     },
@@ -33,12 +21,8 @@
       "PackagePath": "staticwebassets\\images\\Jean.jpg"
     },
     {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Kakashi.jpg",
-      "PackagePath": "staticwebassets\\images\\Kakashi.jpg"
-    },
-    {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Miloud.jpg",
-      "PackagePath": "staticwebassets\\images\\Miloud.jpg"
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Kakashi.png",
+      "PackagePath": "staticwebassets\\images\\Kakashi.png"
     },
     {
       "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Pierre.jpg",
@@ -53,20 +37,20 @@
       "PackagePath": "staticwebassets\\images\\Youssef.webp"
     },
     {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\annie.jpg",
-      "PackagePath": "staticwebassets\\images\\annie.jpg"
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\annie.png",
+      "PackagePath": "staticwebassets\\images\\annie.png"
     },
     {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\armin.jpg",
-      "PackagePath": "staticwebassets\\images\\armin.jpg"
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\armin.png",
+      "PackagePath": "staticwebassets\\images\\armin.png"
     },
     {
       "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\hinata.png",
       "PackagePath": "staticwebassets\\images\\hinata.png"
     },
     {
-      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\mikasa.jpg",
-      "PackagePath": "staticwebassets\\images\\mikasa.jpg"
+      "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\mikasa.png",
+      "PackagePath": "staticwebassets\\images\\mikasa.png"
     },
     {
       "Id": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\riskaa.jpg",

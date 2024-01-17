@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SN6W77imXWZWwHNaX530LAw4bzhxMyT25F3Rg53ZXes=",
+  "Hash": "G5bjyIY935WK568GFxnECNr48DX9/1EtAnEBx7Jxd2I=",
   "Source": "Hospital-Software",
   "BasePath": "_content/Hospital-Software",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png",
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\annie.png",
       "SourceId": "Hospital-Software",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
       "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png",
+      "RelativePath": "images/annie.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,15 +31,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png"
+      "OriginalItemSpec": "wwwroot\\images\\annie.png"
     },
     {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\armin.png",
       "SourceId": "Hospital-Software",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
       "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
+      "RelativePath": "images/armin.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,58 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png"
-    },
-    {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png",
-      "SourceId": "Hospital-Software",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
-      "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\2b7b0011-e318-40ff-90db-fb14553bf3b6_Sakura.png"
-    },
-    {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\annie.jpg",
-      "SourceId": "Hospital-Software",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
-      "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/annie.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\annie.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\armin.jpg",
-      "SourceId": "Hospital-Software",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
-      "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/armin.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\armin.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\armin.png"
     },
     {
       "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Elie.jpg",
@@ -204,12 +153,12 @@
       "OriginalItemSpec": "wwwroot\\images\\Jean.jpg"
     },
     {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Kakashi.jpg",
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Kakashi.png",
       "SourceId": "Hospital-Software",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
       "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/Kakashi.jpg",
+      "RelativePath": "images/Kakashi.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,15 +167,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Kakashi.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\Kakashi.png"
     },
     {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\mikasa.jpg",
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\mikasa.png",
       "SourceId": "Hospital-Software",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
       "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/mikasa.jpg",
+      "RelativePath": "images/mikasa.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -235,24 +184,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\mikasa.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Miloud.jpg",
-      "SourceId": "Hospital-Software",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
-      "BasePath": "_content/Hospital-Software",
-      "RelativePath": "images/Miloud.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\Miloud.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\mikasa.png"
     },
     {
       "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\Pierre.jpg",
