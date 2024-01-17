@@ -313,6 +313,17 @@ namespace Hospital_Software.Controllers
             return doctor;
         }
 
+        [HttpGet("all-patients")]
+        public async Task<List<ApplicationUser>> GetAllPatients()
+        {
+            var allUsers = _context.GetCollection<ApplicationUser>("Users");
+
+            var patientRoleFilter = Builders<ApplicationUser>.Filter.Eq(user => user.RoleName, "Patient");
+            var patients = await allUsers.Find(patientRoleFilter).ToListAsync();
+
+            return patients;
+        }
+
 
 
 

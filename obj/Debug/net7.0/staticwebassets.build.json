@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zfcvtn37PPsd26NJSlC4DLWtxZkJrIw1VSjkIa8//q8=",
+  "Hash": "SN6W77imXWZWwHNaX530LAw4bzhxMyT25F3Rg53ZXes=",
   "Source": "Hospital-Software",
   "BasePath": "_content/Hospital-Software",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png",
+      "SourceId": "Hospital-Software",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\",
+      "BasePath": "_content/Hospital-Software",
+      "RelativePath": "images/0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\0553d651-99bb-41d0-8d60-1bb070f43388_Sakura.png"
+    },
     {
       "Identity": "C:\\Users\\KharoufiY\\.NET Projects\\Hospital-Software\\Hospital-Software\\wwwroot\\images\\1ac0013a-cba9-4da5-b489-c5ce96899cd7_Sakura.png",
       "SourceId": "Hospital-Software",

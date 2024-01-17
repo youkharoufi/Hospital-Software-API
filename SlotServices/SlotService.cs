@@ -70,37 +70,6 @@ namespace Hospital_Software.Services
         }
 
 
-        //public async Task<IEnumerable<Slot>> GenerateFutureSlots(DateTime startDate, int daysToGenerate)
-        //{
-        //    var allSlots = new List<Slot>();
-
-        //    // Assuming GetAllDoctorIds is an existing synchronous method that returns a list of doctor IDs
-        //    var doctorIds = await GetAllDoctorIds(); // No need for await if it's synchronous
-
-        //    foreach (var doctorId in doctorIds)
-        //    {
-        //        var slotsForDoctor = new Slot
-        //        {
-        //            DoctorId = doctorId,
-        //            SlotTime = new List<DateTime>(),
-        //            Booked = false
-        //        };
-
-        //        for (var date = startDate; date < startDate.AddDays(daysToGenerate); date = date.AddDays(1))
-        //        {
-        //            for (var hour = 9; hour < 17; hour++) // From 9 AM to 5 PM
-        //            {
-        //                var slotDateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);
-        //                slotsForDoctor.SlotTime.Add(slotDateTime);
-        //            }
-        //        }
-
-        //        allSlots.Add(slotsForDoctor);
-        //    }
-
-        //    return allSlots;
-        //}
-
         public async Task<List<Slot>> GenerateWeeklySlotsAsync(string doctorId)
         {
             var startDate = DateTime.Today; // Start from today

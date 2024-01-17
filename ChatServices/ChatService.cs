@@ -73,11 +73,14 @@ namespace Hospital_Software.ChatServices
 
         public async Task<List<Message>> OnPatientReadsMessages(string doctorId, string patientId)
         { 
-            var filter = Builders<Message>.Filter.Eq(m => m.SenderId, patientId) & Builders<Message>.Filter.Eq(m => m.ReceivingId, doctorId) & Builders<Message>.Filter.Eq(m => m.Read, false);
+            var filter = Builders<Message>.Filter.Eq(m => m.SenderId, doctorId) & Builders<Message>.Filter.Eq(m => m.ReceivingId, patientId) & Builders<Message>.Filter.Eq(m => m.Read, false);
+
+            var update = Builders<Message>.Update
+                    .Set(s => s.Read, true);
+
+            var updateResult = await _messagesCollection.UpdateManyAsync(filter, update);
 
             var unreadMessages = await _messagesCollection.Find(filter).ToListAsync();
-
-            unreadMessages.ForEach((msg) => { msg.Read = true; });
 
             return unreadMessages;
         }
@@ -102,11 +105,15 @@ namespace Hospital_Software.ChatServices
 
         public async Task<List<Message>> OnDoctorReadsMessages(string doctorId, string patientId)
         {
-            var filter = Builders<Message>.Filter.Eq(m => m.SenderId, doctorId) & Builders<Message>.Filter.Eq(m => m.ReceivingId, patientId) & Builders<Message>.Filter.Eq(m => m.Read, false);
+            var filter = Builders<Message>.Filter.Eq(m => m.SenderId, patientId) & Builders<Message>.Filter.Eq(m => m.ReceivingId, doctorId) & Builders<Message>.Filter.Eq(m => m.Read, false);
+
+            var update = Builders<Message>.Update
+                       .Set(s => s.Read, true);
+
+            var updateResult = await _messagesCollection.UpdateManyAsync(filter, update);
 
             var unreadMessages = await _messagesCollection.Find(filter).ToListAsync();
 
-            unreadMessages.ForEach((msg) => { msg.Read = true; });
 
             return unreadMessages;
         }
